@@ -1,0 +1,25 @@
+version: '3.6'
+
+services:
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1
+    container_name: elasticsearch-fuzzy
+    ports: ['9200:9200']
+    networks: ['elastic']
+    volumes:
+      - '~/es-con-fuzzy:/usr/share/elasticsearch/data'
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.3.1
+    container_name: kibana-fuzzy
+    ports: ['5601:5601']
+    networks: ['elastic']
+    depends_on: ['elasticsearch']
+
+
+volumes:
+  container-volume:
+
+networks: {elastic: {}}
+
